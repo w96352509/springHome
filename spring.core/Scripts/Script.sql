@@ -1,0 +1,1 @@
+slelect amount from stock where bid = 2

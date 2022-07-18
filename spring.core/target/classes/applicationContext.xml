@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.3.xsd
+		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.3.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd
+		http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd">
+
+
+    <context:component-scan base-package="com.spring.core.session03"></context:component-scan>
+    
+    <bean id="hello"                      class="com.spring.core.session01.beans.Hello"></bean>
+    <bean id="lotto"                      class="com.spring.core.session02.beans.Lotto"></bean>
+    <bean id="lotto2"   scope="prototype" class="com.spring.core.session02.beans.Lotto"></bean>
+    
+    <!-- protoType 配置 -->
+    <bean id="author1"  scope="prototype" class="com.spring.core.session02.beans.Author">
+     <property name="name">
+      <value>John</value>
+     </property>
+     <property name="sex">
+      <value>m</value>
+     </property>
+     <property name="age">
+      <value>18</value>
+     </property>
+    </bean>
+    
+    <!-- protoType 配置(簡化) -->
+    <bean id="author3"  scope="prototype" class="com.spring.core.session02.beans.Author"
+          p:name="John2" p:sex="m" p:age="18"/>
+    
+    
+    <!-- constructor 配置 -->
+    <bean id="author2"  scope="prototype" class="com.spring.core.session02.beans.Author">
+     <constructor-arg index="0" value="Mary"></constructor-arg>
+     <constructor-arg index="1" value="w"></constructor-arg>
+     <constructor-arg index="2" value="18"></constructor-arg>
+    </bean>
+    
+    <!-- constructor 配置(簡化) -->
+    <bean id="author4"  scope="prototype" class="com.spring.core.session02.beans.Author" 
+          c:name="Mary2" c:age="18" c:sex="w"/>
+          
+    <!-- 無參數注入 -->
+    <bean id ="book1"  class="com.spring.core.session02.beans.Book"></bean>     
+    
+    <!-- ref注入 -->
+    <bean id ="book2"  class="com.spring.core.session02.beans.Book"
+          p:name="JavaBook" p:price="150" p:author-ref="author1">
+    </bean>
+     <bean id ="book3"  class="com.spring.core.session02.beans.Book"
+          c:name="SpringBook" c:price="150" c:author-ref="author2">
+    </bean>
+    
+    <!-- 手動配置 -->
+    <bean id="color" class="com.spring.core.session02.beans.Color" p:name="紅色" />
+    <bean id="white" class="com.spring.core.session02.beans.Color" p:name="白色" />
+    <bean id="size"  class="com.spring.core.session02.beans.Size" p:name="B3" />
+    <bean id="a4"  class="com.spring.core.session02.beans.Size" p:name="A4" />
+    <!-- 自動配置 -->
+    <!-- byType 的限制: 若超過1個可以匹配的型別就會發生錯誤 -->
+    
+    <!--  
+    <bean id="paper1" p:id="101" autowire="byType" class="com.spring.core.session02.beans.Paper" />
+    -->
+    
+    <!-- byName -->
+    <bean id="paper1" p:id="101" autowire="byName" class="com.spring.core.session02.beans.Paper" />
+    <bean id="paper2" p:id="202" autowire="byName" class="com.spring.core.session02.beans.WhiteA4"></bean>
+    
+    <!-- 外部檔配置 -->
+    <context:property-placeholder location="data.properties"/>
+    
+    <!-- 建立 Clazz 實例並使用外部資源來注入物件屬性資料 -->
+    <!-- 學科1配置 -->
+    <bean id="clazz1" p:id="1" 
+                      p:name="${clazz.name}" 
+                      p:credit="${clazz.credit}" 
+                      class="com.spring.core.session03.beans.Clazz"></bean>
+    
+    <!-- 學科2配置 -->
+    <bean id="clazz2" p:id="2" 
+                      p:name="${clazz.name2}" 
+                      p:credit="${clazz.credit2}" 
+                      class="com.spring.core.session03.beans.Clazz"></bean>                  
+    
+    
+    <!-- 使用 Set 配置 -->
+    <!-- 學生配置 1 -->                  
+    <bean id="student1" p:id="1" p:name="John" class="com.spring.core.session03.beans.Student">
+     <property name="clazzs">
+      <set>
+       <ref bean="clazz1"/>
+       <ref bean="clazz2"/>
+      </set>
+     </property>
+    </bean>
+    <!-- 學生配置 2 -->                  
+    <bean id="student2" p:id="2" p:name="Mary" class="com.spring.core.session03.beans.Student">
+     <property name="clazzs">
+      <set>
+       <ref bean="clazz1"/>
+      </set>
+     </property>
+    </bean>
+    
+    <!-- 使用 Set / List / Map -->
+    <!-- 教師配置 -->
+    <bean id="teacher1" p:id="101" p:name="JJ" class="com.spring.core.session03.beans.Teacher">
+     <!-- 配置學生 -->
+     <property name="students">
+      <set>
+       <ref bean="student1"/>
+       <ref bean="student2"/>
+      </set> 
+     </property>
+     <!-- 科目配置 -->
+     <property name="subjects">
+      <list>
+       <value>Program</value>
+       <value>Math</value>
+      </list>
+     </property>
+     <!-- 薪資配置 -->
+     <property name="salary">
+      <map>
+       <entry key="本薪">
+        <value>50000</value>
+       </entry>
+       <entry key="獎金">
+        <value>20000</value>
+       </entry>
+      </map>
+     </property>
+    </bean>
+    
+    <!-- 使用 util: Set / List / Map -->
+    <!-- 教師2配置(先將集合資配置好在帶入) -->
+    <bean id="teacher2" p:id="202" p:name="J2" p:students-ref="students" p:subjects-ref="subjects" p:salary-ref="salary" class="com.spring.core.session03.beans.Teacher"></bean>
+    
+    <!-- 學生 -->
+    <util:set id="students">
+     <ref bean="student1"/>
+     <ref bean="student2"/>
+    </util:set>
+    
+    <!-- 科目 -->
+    <util:list id="subjects">
+     <value>英語</value>
+    </util:list>
+    
+    <!-- 薪資 -->
+    <util:map id="salary">
+     <entry>
+      <key>
+        <value>本薪</value>
+      </key>
+        <value>50000</value>
+     </entry>
+     <entry>
+       <key>
+        <value>獎金</value>
+      </key>
+        <value>10000</value>
+     </entry>
+    </util:map>
+    
+    <!-- 生命週期 -->
+    <bean id="cycle1" init-method="init" destroy-method="destory" class="com.spring.core.session03.beans.BeanCycle"></bean>
+    
+    <!-- Factory -->
+    <bean id="car" class="com.spring.core.session03.beans.CarFactory"></bean>
+</beans>
