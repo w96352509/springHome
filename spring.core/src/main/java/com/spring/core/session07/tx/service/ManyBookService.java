@@ -4,5 +4,5 @@ import com.spring.core.session07.tx.exception.InsufficientAmount;
 import com.spring.core.session07.tx.exception.InsufficientQuantity;
 
 public interface ManyBookService {
-	void buyMany(Integer wid, Integer... bids) throws InsufficientAmount, InsufficientQuantity;
+	void buyMany() throws InsufficientAmount, InsufficientQuantity;
 }

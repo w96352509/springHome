@@ -4,8 +4,9 @@ import com.spring.core.session07.tx.exception.InsufficientAmount;
 import com.spring.core.session07.tx.exception.InsufficientQuantity;
 
 public interface BookService {
-	void buyOne(Integer wid, Integer bid) throws InsufficientAmount, InsufficientQuantity;
-	void addOne(String ename , Integer price);
-	void addstock(Integer bid , Integer amount);
+	void buyOne() throws InsufficientAmount, InsufficientQuantity;
+	void addOne();
+	void addWallet();
 	void queryAll();
+	void updateStock();
 }

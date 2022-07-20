@@ -100,19 +100,17 @@ public class BookDaoImpl implements BookDao {
 
 	@Override
 	public List<Book> queryAll() {
-		String sql = "select bid , bname , price , ct from book";
-		List<Book> books = null;
-		books = jdbcTemplate.query(sql, (ResultSet rs, int rowNum)->{
+		String sql = "select bid , bname , price  , ct from book";
+		List<Book> books =
+		    jdbcTemplate.query(sql, (ResultSet rs, int rowNum)->{
 			Book book = new Book();
 			book.setBid(rs.getInt("bid"));
 			book.setBname(rs.getString("bname"));
 			book.setPrice(rs.getInt("price"));
 			book.setCt(rs.getDate("ct"));
-			
-			String sql2 ="select sid,bid,amount from stock where bid=?";
-			Stock stock = jdbcTemplate.queryForObject(sql2, new BeanPropertyRowMapper<Stock>(Stock.class), book.getBid());
+			String sql2 = "select sid , bid , amount from stock where bid=?";
+		    Stock stock = jdbcTemplate.queryForObject(sql2, new BeanPropertyRowMapper<Stock>(Stock.class),book.getBid());
 			book.setStock(stock);
-			
 			return book;
 		});
 		return books;
@@ -122,6 +120,18 @@ public class BookDaoImpl implements BookDao {
 	public Integer update(Integer bid, Integer amount) {
 		String sql = "update stock set amount = ? where bid = ? ";
 		return jdbcTemplate.update(sql , amount , bid);
+	}
+
+	@Override
+	public Integer getByBname(String bname) {
+		String sql = "select bid from book where bname=?";
+		return jdbcTemplate.queryForObject(sql,Integer.class,bname);
+	}
+
+	@Override
+	public Integer addWallt(String wname, Integer money) {
+		String sql = "insert into wallet(wname , money) value(?,?)";
+		return jdbcTemplate.update(sql,wname,money);
 	}
 
 	

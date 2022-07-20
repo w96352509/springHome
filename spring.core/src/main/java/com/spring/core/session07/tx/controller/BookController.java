@@ -19,9 +19,10 @@ public class BookController {
 	@Autowired
 	private ManyBookService manyBookService;
 	
-	public void buyBook(Integer wid, Integer bid) {
+	// 單筆購買
+	public void buyBook() {
 		try {
-			bookService.buyOne(wid, bid);
+			bookService.buyOne();
 			System.out.println("購買單筆");
 		} catch (InsufficientAmount e) {
 			e.printStackTrace();
@@ -32,9 +33,10 @@ public class BookController {
 		}
 	}
 	
-	public void buyBooks(Integer wid, Integer... bids) {
+	// 多筆購買
+	public void buyBooks() {
 		try {
-			manyBookService.buyMany(wid, bids);
+			manyBookService.buyMany();
 		} catch (InsufficientAmount e) {
 			e.printStackTrace();
 			System.out.println("庫存不足 :" + e);
@@ -44,16 +46,24 @@ public class BookController {
 		}
 	}
 	
-	public void addBook(String ename , Integer price) {
-		bookService.addOne(ename, price);
+	// 新增書和庫存
+	public void addBook() {
+		bookService.addOne();
 	}
 	
+	// 全搜尋
 	public void queryAll() {
 		System.out.println("查詢結果:");
 		bookService.queryAll();
 	}
 	
-	public void addStock(Integer bid , Integer amount) {
-		bookService.addstock(bid, amount);
+	// 指定 bid 新增
+	public void updateStock() {
+		bookService.updateStock();
+	}
+	
+	// 新增錢包
+	public void addWallet() {
+		bookService.addWallet();
 	}
 }

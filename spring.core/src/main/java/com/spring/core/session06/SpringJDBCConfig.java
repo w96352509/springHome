@@ -18,7 +18,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 @Configuration
 @ComponentScan(basePackages = { "com.spring.core.session06" })
 @PropertySource(value = { "classpath:db.properties" }, ignoreResourceNotFound = true)
-@EnableTransactionManagement
+// @EnableTransactionManagement
 public class SpringJDBCConfig {
 
 	@Autowired

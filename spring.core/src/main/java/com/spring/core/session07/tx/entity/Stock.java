@@ -6,19 +6,14 @@ public class Stock {
 	private Integer amount;
 	private Integer bid;
 	
-	private Book book;
-
-	
-    public Stock() {
+	public Stock() {
 		
 		
 	}
 	
-	public Stock(Integer amount, Integer bid, Book book) {
-		
+	public Stock(Integer amount, Integer bid) {
 		this.amount = amount;
 		this.bid = bid;
-		this.book = book;
 	}
 
 	public Integer getSid() {
@@ -45,19 +40,12 @@ public class Stock {
 		this.bid = bid;
 	}
 
-	public Book getBook() {
-		return book;
-	}
-
-	public void setBook(Book book) {
-		this.book = book;
-	}
-
 	@Override
 	public String toString() {
-		return "Stock [sid=" + sid + ", amount=" + amount + ", bid=" + bid + ", book=" + book + "]";
+		return "Stock [sid=" + sid + ", amount=" + amount + ", bid=" + bid + "]";
 	}
 
+	
 	
 	
 	
