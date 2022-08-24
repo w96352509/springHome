@@ -23,7 +23,7 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public void buyOne() throws InsufficientAmount, InsufficientQuantity {
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("輸入購買書本 :");
+		System.out.println("輸入購買書本名稱 :");
 		String bname  = scanner.next();
 		Integer bid = bookDao.getByBname(bname);
 		bookDao.updateStock(bid, 1);

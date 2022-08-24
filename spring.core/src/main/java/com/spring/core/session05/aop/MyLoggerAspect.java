@@ -47,7 +47,7 @@ public class MyLoggerAspect {
 	public void afterReturning(JoinPoint joinPoint , Object result) {
 		String methodName = joinPoint.getSignature().getName(); // 取得連接點的方法簽章名稱
 		Object[] args = joinPoint.getArgs(); // 方法參數
-		System.out.printf("後置通知 - 方法名稱: %s 方法參數: %s 結果: %s \n", methodName, args , result);
+		System.out.printf("返回通知 - 方法名稱: %s 方法參數: %s 結果: %s \n", methodName, args , result);
 	}
 	
 	@AfterThrowing(value = "pt()" , throwing = "ex")

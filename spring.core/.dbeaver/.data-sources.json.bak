@@ -1,7 +1,7 @@
 {
 	"folders": {},
 	"connections": {
-		"mysql8-182ca1f0e5d-440f824ced61995e": {
+		"mysql8-182960a65be-7c0a0c158084c5f4": {
 			"provider": "mysql",
 			"driver": "mysql8",
 			"name": "web",
@@ -12,6 +12,22 @@
 				"port": "3306",
 				"database": "web",
 				"url": "jdbc:mysql://localhost:3306/web",
+				"home": "C:\\Program Files\\MySQL\\MySQL Router 8.0",
+				"type": "dev",
+				"auth-model": "native"
+			}
+		},
+		"mysql8-182c99f669a-63b3a6e30b5abfa3": {
+			"provider": "mysql",
+			"driver": "mysql8",
+			"name": "web2",
+			"save-password": true,
+			"read-only": false,
+			"configuration": {
+				"host": "localhost",
+				"port": "3306",
+				"database": "web2",
+				"url": "jdbc:mysql://localhost:3306/web2",
 				"home": "C:\\Program Files\\MySQL\\MySQL Router 8.0",
 				"type": "dev",
 				"auth-model": "native",
