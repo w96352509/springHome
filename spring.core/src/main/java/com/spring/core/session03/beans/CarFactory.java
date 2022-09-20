@@ -7,7 +7,7 @@ public class CarFactory implements FactoryBean<Car>  {
 	@Override
 	public Car getObject() throws Exception {
 		
-		return new Car("BMW" , 10000000);
+		return new Car();
 	}
 
 	@Override

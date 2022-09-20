@@ -22,9 +22,11 @@ public class AuthorTest {
 		System.out.println(author3);
 		System.out.println(author4);
 		
-		ApplicationContext ctx2 = new AnnotationConfigApplicationContext(Authorconfig.class);
-		Author authorJ = ctx2.getBean("authorJava" , Author.class);
+		AnnotationConfigApplicationContext  ctx2 = new AnnotationConfigApplicationContext(Authorconfig.class);
+		Author authorJ = ctx2.getBean(Author.class);
 		System.out.println(authorJ.toString());
+		
+		
 	}
 	
 }
